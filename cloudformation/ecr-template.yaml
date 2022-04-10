@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Cloudformation template for Node sample ECR private repo
+Parameters:
+  IAMUser:
+    Type: String
+    Description: IAM user to grant ECR access to
+  RepositoryName:
+    Type: String
+    Description: Name of your repository
+
+Resources:
+  MyIAMPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: iam-user-ecr-policy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'ecr:GetAuthorizationToken'
+              - 'ecr:DescribeRepositories'
+              - 'ecr:CreateRepository'
+            Resource: '*'
+      Users:
+        - !Ref IAMUser
+Resources:
+  MyPublicRepositry:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: !Ref RepositoryName
+      ImageScanningConfiguration:
+        ScanOnPush: true
+      ImageTagMutability: MUTABLE
+      RepositoryPolicyText:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: ManageRepo
+            Effect: Allow
+            Principal:
+              AWS:
+                - !Sub 'arn:aws:iam::${AWS::AccountId}:user/${IAMUser}'
+            Action:
+              - "ecr:GetDownloadUrlForLayer"
+              - "ecr:BatchGetImage"
+              - "ecr:BatchDeleteImage"
+              - "ecr:BatchCheckLayerAvailability"
+              - "ecr:PutImage"
+              - "ecr:InitiateLayerUpload"
+              - "ecr:UploadLayerPart"
+              - "ecr:CompleteLayerUpload"
+              - "ecr:GetRepositoryPolicy"
+              - "ecr:ListImages"
+              - "ecr:DescribeImages"

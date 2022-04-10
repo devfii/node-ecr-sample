@@ -1,0 +1,25 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ECR Repository Policy",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["arn:aws:iam::<ACCOUNT-ID>:user/<IAM-USER>"]
+      },
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+	"ecr:BatchDeleteImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:GetRepositoryPolicy",
+        "ecr:ListImages",
+        "ecr:DescribeImages",
+        "ecr:BatchGetImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload",
+        "ecr:PutImage"
+      ]
+    }
+  ]
+}

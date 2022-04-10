@@ -1,0 +1,21 @@
+{
+  "name": "ecr-sample",
+  "version": "1.0.0",
+  "description": "<h1> Using ECR to host Docker images</h1> Create ECR repository --private use cli use terraform --public use cli use terraform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devfii/node-ecr-sample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devfii/node-ecr-sample/issues"
+  },
+  "homepage": "https://github.com/devfii/node-ecr-sample#readme"
+}
