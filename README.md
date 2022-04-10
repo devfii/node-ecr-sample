@@ -8,6 +8,7 @@ It includes the following files and folders:
 * package-lock.json
 * Dockerfile
 * server.js
+
 The project requires an ECR repository, an ECR repository policy and an IAM policy to be attached to an existing IAM user.
 The user may decide to either use the AWS CLI to create these resources or CloudFormation or Terraform.
 
