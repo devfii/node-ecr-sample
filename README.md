@@ -101,15 +101,16 @@ To clean up, run the following command
 
 
 ## Authenticating with ECR registry
-There are two options to authenticate your Docker clientwith your ECR repository. These are:
+There are two options to authenticate your Docker client with your ECR repository. These are:
   1. [ECR credential helper](https://github.com/awslabs/amazon-ecr-credential-helper)
   2. AWS CLI
   
-     Run the below command
+     To use the CLI for authentication, we generate a password from the ECR registry and pipe it to the docker login command. 
      ```
      aws ecr get-login-password --region region | docker login --username AWS \
      --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
      ```
+ Note that for both options, the IAM user configured on the AWS CLI requires permission to generate the authorization token. The permission required is ```"ecr:GetAuthorizationToken"```
 
 ## Build, Tag and Push Image to ECR 
 From the root directory of this repo, we can build our container image by running below commands
